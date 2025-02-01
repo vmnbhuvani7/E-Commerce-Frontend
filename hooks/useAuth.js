@@ -41,7 +41,7 @@ export const useAuth = () => {
     try {
       await signupUser(email, password);
       toast.success("Signup successful! You can now log in.");
-      router.push("/");
+      router.push("/login");
     } catch (error) {
       toast.error(error.message);
     } finally {

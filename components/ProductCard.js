@@ -22,7 +22,7 @@ export default function ProductCard({ product, addToCart }) {
         disabled={product?.stock === 0}
         className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg disabled:bg-gray-400 hover:bg-blue-600 focus:outline-none transition-colors duration-300"
       >
-        {product?.stock === 0 ? 'Out of Stock' : 'Add to Cart'} {addToCartCount?.quantity ? `(${addToCartCount?.quantity})` : ''}
+        {product?.stock === 0 ? 'Out of Stock' : 'Add to Cart'} {addToCartCount?.quantity ? `(${addToCartCount?.quantity + 1})` : ''}
       </button>
     </div>
   );
