@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 export default function ProductCard({ product, addToCart }) {
+  const storedCart = JSON.parse(localStorage.getItem("cart"));
+  const addToCartCount = storedCart?.find(data => data?.id === product?._id)
   return (
     <div key={product?._id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
       <div className="relative w-full h-48">
@@ -20,7 +22,7 @@ export default function ProductCard({ product, addToCart }) {
         disabled={product?.stock === 0}
         className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg disabled:bg-gray-400 hover:bg-blue-600 focus:outline-none transition-colors duration-300"
       >
-        {product?.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+        {product?.stock === 0 ? 'Out of Stock' : 'Add to Cart'} {addToCartCount?.quantity ? `(${addToCartCount?.quantity})` : ''}
       </button>
     </div>
   );

@@ -16,6 +16,26 @@ export const loginUser = async (email, password) => {
     throw new Error(error.message);
   }
 };
+
+export const fetchProducts = async () => {
+  try { const token = localStorage.getItem("token");
+   
+    const res = await  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    })
+
+    if (!res.ok) {
+      throw new Error("Something went wrong.");
+    }
+
+    return await res.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
 export const signupUser = async (email, password) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {

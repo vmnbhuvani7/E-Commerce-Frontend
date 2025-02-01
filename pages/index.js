@@ -6,6 +6,7 @@ import useCart from "../hooks/useCart";
 import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { fetchProducts } from "../utils/api";
 
 // Connect to WebSocket
 const socket = io(process.env.NEXT_PUBLIC_API_URL);
@@ -13,32 +14,17 @@ const socket = io(process.env.NEXT_PUBLIC_API_URL);
 const Home = () => {
   const [products, setProducts] = useState([]);
   const { cart, addToCart } = useCart();
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
     // Fetch products from backend
-    const fetchProducts = () => {
-      const token = localStorage.getItem("token");
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('Failed to fetch products');
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setProducts(data);
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error(error.message);
-        });
+    const fetchProductsData = async () => {
+      const data = await fetchProducts()
+      setProducts(data);
+      setLoading(false)
     };
-    fetchProducts();
-
+    fetchProductsData()
     // Listen for real-time stock updates
     socket.on("stockUpdate", (data) => {
       setProducts((prevProducts) =>
@@ -58,6 +44,11 @@ const Home = () => {
       <div className="container mx-auto p-6 ">
         <h1 className="text-4xl font-bold mb-6 text-center text-blue-500">Product List</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {loading && <div className="flex justify-center items-center space-x-2 w-full">
+            <div
+              className="w-8 h-8 border-4 border-t-4 border-gray-200 border-solid rounded-full animate-spin border-t-blue-500"
+            ></div>
+          </div>}
           {products?.map((product) => (
             <ProductCard key={product._id} product={product} addToCart={addToCart} />
           ))}

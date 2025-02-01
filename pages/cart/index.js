@@ -46,8 +46,8 @@ const Cart = () => {
       <div className="container mx-auto p-6">
         <div className='flex'>
           <div className='cursor-pointer'
-          onClick={()=> router.push("/")}><CircleArrowLeft className='text-blue-500' /></div>
-          <div className='flex text-4xl font-bold mb-6 text-center text-blue-600 w-[95%]'>
+            onClick={() => router.push("/")}><CircleArrowLeft className='text-blue-500' /></div>
+          <div className='text-4xl font-bold mb-6 text-center text-blue-600 w-[95%]'>
             <h1 className="">Your Cart</h1>
           </div>
         </div>
