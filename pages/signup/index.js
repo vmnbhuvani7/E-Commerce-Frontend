@@ -24,8 +24,8 @@ export default function Register() {
   return (
     <div className="flex items-center justify-center h-screen-minus bg-gray-100" style={{ backgroundImage: "url('/e-com-image.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <AuthForm
-        title="Register"
-        submitButtonText="Register"
+        title="Sign up"
+        submitButtonText="Sign up"
         handleSubmit={handleSubmit}
       />
       {error && <p className="text-center text-sm text-red-500 mt-4">{error}</p>}

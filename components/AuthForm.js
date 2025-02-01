@@ -90,7 +90,7 @@ const AuthForm = ({ title, submitButtonText, handleSubmit }) => {
         <p className="text-center text-sm text-gray-600 mt-4">
           No account?{" "}
           <Link href="/signup">
-            <span className="text-blue-500 font-medium hover:underline">Register here</span>
+            <span className="text-blue-500 font-medium hover:underline">Sign up here</span>
           </Link>
         </p>
       ) : (
