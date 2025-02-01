@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ShoppingCart, LogOut } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Layout({ children }) {
     // Clear the localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("cart");
-
+    toast.success("You have been logged out successfully.")
     // Redirect to login page
     router.push("/login");
   };
